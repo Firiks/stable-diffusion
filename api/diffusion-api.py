@@ -1,5 +1,5 @@
 """
-Use GPU/CPU with pretrained model to generate images from text prompts
+Use GPU with pretrained model to generate images from text prompts
 """
 
 # fastapi
@@ -54,6 +54,8 @@ pipe.to(device)
 @app.get("/")
 def generate(prompt: str):
     try:
+        print('Processing prompt: ' + prompt)
+
         with autocast(device):
             image = pipe(prompt, guidance_scale=8.5).images[0] # generate image
 
